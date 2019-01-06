@@ -1,13 +1,15 @@
-package com.example.marcela.reso;
+package com.example.marcela.reso.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,11 +25,17 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.marcela.reso.R;
+import com.example.marcela.reso.UserHandler;
+import com.example.marcela.reso.models.AuthorizedGetModel;
 import com.example.marcela.reso.models.SignInResponse;
 import com.example.marcela.reso.models.UserData;
 import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,8 +81,16 @@ public class LoginActivity extends AppCompatActivity {
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-    }
+        //todo: check for user token
+        UserHandler h = new UserHandler(this);
+        String accessToken = null;
+        if ((accessToken = h.getAccessToken()) == null)
+        {
+            return;
+        }
+        getUserData(accessToken);
 
+    }
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -187,10 +203,13 @@ public class LoginActivity extends AppCompatActivity {
                         SignInResponse signInResponse = new Gson().fromJson(response, SignInResponse.class);
                         signInResponse.userDataObject = new Gson().fromJson(signInResponse.getUserDataString(), UserData.class);
 
-                        UserHandler userDataHandler =new UserHandler(LoginActivity.this);
+                        UserHandler userDataHandler = new UserHandler(LoginActivity.this);
                         userDataHandler.setUserdata(signInResponse);
-                    Toast.makeText(LoginActivity.this, "Sign in Succes:" + signInResponse.getAccessToken(), Toast.LENGTH_SHORT).show();
-                    showProgress(false);
+                        userDataHandler.setEmail(userName);
+                        Log.d("issues", signInResponse.getUserDataString());
+                        Toast.makeText(LoginActivity.this, "Sign in Succes:" + signInResponse.getUserDataString(), Toast.LENGTH_SHORT).show();
+                        showProgress(false);
+                        goToIssuesScreen();
                     }catch (Exception e)
                     {
                         e.toString();
@@ -211,13 +230,49 @@ public class LoginActivity extends AppCompatActivity {
         public Map<String, String> getHeaders() throws AuthFailureError {
             Map<String, String> map = new HashMap<>();
             map.put("Content-Type", "application/x-www-form-urlencoded");
-
             return map;
         }
     };
 
     // Add the request to the RequestQueue.
     queue.add(stringRequest);
+    }
+
+    public void goToIssuesScreen()
+    {
+        Intent intent = new Intent(this, IssuesActivity.class);
+        startActivity(intent);
+    }
+
+    private void getUserData(final String accessToken)
+    {
+        String url = "http://itec-api.deventure.co/api/Account/IsAuthorized?email=";
+        final UserHandler userHandler = new UserHandler(this);
+        String email = userHandler.getEmail();
+        url+=email;
+        JsonObjectRequest request = new JsonObjectRequest(url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                AuthorizedGetModel model = new Gson().fromJson(response.toString(), AuthorizedGetModel.class);
+                UserData userData = model.Data;
+                userHandler.setUserdata(userData);
+                goToIssuesScreen();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("Authorization", "Bearer " + accessToken);
+                return map;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(request);
     }
 }
 

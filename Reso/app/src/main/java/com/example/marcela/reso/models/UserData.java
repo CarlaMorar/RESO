@@ -2,6 +2,8 @@ package com.example.marcela.reso.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class UserData {
@@ -22,15 +24,15 @@ public class UserData {
 
     public double Latitude;
 
-    public double Longitude ;
+    public double Longitude;
 
-    public int Radius ;
+    public int Radius;
 
-    public int Age ;
+    public int Age;
 
-    public int Gender ;
+    public int Gender;
 
-    public String ProfilePicture ;
+    public String ProfilePicture;
 
-//    public ICollection<IssueGeModel> Issues ;
+    public List<IssueGetModel> Issues;
 }
