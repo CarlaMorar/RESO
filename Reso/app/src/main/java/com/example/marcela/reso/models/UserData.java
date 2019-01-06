@@ -16,7 +16,7 @@ public class UserData {
         this.id = id;
     }
 
-        public String AspNetUserId;
+    public String AspNetUserId;
 
     public String FullName;
 
@@ -33,5 +33,4 @@ public class UserData {
     public String ProfilePicture ;
 
 //    public ICollection<IssueGeModel> Issues ;
-
 }
