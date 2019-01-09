@@ -1,6 +1,7 @@
 package com.example.marcela.reso.models;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 
 public class IssueGetModel {
@@ -26,5 +27,10 @@ public class IssueGetModel {
 
 //    public virtual ICollection<CommentGetModel> Comments;
 //
-//    public virtual ICollection<string> Images;
+//    public  List <String> Images;
+    public List<String> Images;
+
+    public  List<CommentGetModel> Comments;
+
 }
+

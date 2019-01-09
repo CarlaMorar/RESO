@@ -20,13 +20,14 @@ import com.google.gson.Gson;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class IssuesActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private UserData userData;
-    private HashMap <MarkerOptions, UUID> markersDictionary;
+    private HashMap <Marker, UUID> markersDictionary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +53,14 @@ public class IssuesActivity extends FragmentActivity implements OnMapReadyCallba
         markersDictionary = new HashMap<>();
         for (IssueGetModel issue : issues)
         {
-            LatLng location = new LatLng(issue.Latitude, issue.Longitude);
+            Random rand = new Random();
+            int nr = rand.nextInt(20500) + 1000 ;
+
+            LatLng location = new LatLng(issue.Latitude - nr, issue.Longitude + nr);
             MarkerOptions marker = new MarkerOptions().position(location).title(issue.Title);
-            markersDictionary.put( marker, issue.Id);
+
+            Marker amarker = mMap.addMarker(marker);
+            markersDictionary.put( amarker, issue.Id);
 
             mMap.addMarker(marker);
         }
@@ -63,7 +69,6 @@ public class IssuesActivity extends FragmentActivity implements OnMapReadyCallba
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-//                marker.
                 UUID issueId = markersDictionary.get(marker);
                 showIssueScreen(issueId);
                 return false;

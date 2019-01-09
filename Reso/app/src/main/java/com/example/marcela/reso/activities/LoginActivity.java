@@ -89,7 +89,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         getUserData(accessToken);
-
     }
 
     /**
@@ -207,7 +206,7 @@ public class LoginActivity extends AppCompatActivity {
                         userDataHandler.setUserdata(signInResponse);
                         userDataHandler.setEmail(userName);
                         Log.d("issues", signInResponse.getUserDataString());
-                        Toast.makeText(LoginActivity.this, "Sign in Succes:" + signInResponse.getUserDataString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LoginActivity.this, "Sign in Succes:" + signInResponse.getUserDataString(), Toast.LENGTH_SHORT).show();
                         showProgress(false);
                         goToIssuesScreen();
                     }catch (Exception e)
