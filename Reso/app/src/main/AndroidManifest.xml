@@ -46,7 +46,12 @@
         <activity
             android:name=".activities.IssuesActivity"
             android:label="@string/title_activity_issues" />
-        <activity android:name=".activities.IssueActivity"></activity>
+        <activity android:name=".activities.IssueActivity" />
+        <activity android:name=".activities.RegisterActivity" />
+        <activity
+            android:name=".activities.AddIssueActivity"
+            android:label="@string/title_activity_add_issue_activitz"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

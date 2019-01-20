@@ -13,4 +13,5 @@
         completions."
     </string>
     <string name="title_activity_issues">Map</string>
+    <string name="title_activity_add_issue_activitz">AddIssueActivitz</string>
 </resources>

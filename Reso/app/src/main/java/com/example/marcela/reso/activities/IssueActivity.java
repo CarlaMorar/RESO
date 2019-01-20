@@ -27,6 +27,7 @@ import org.w3c.dom.Text;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IssueActivity extends AppCompatActivity {
@@ -79,7 +80,17 @@ public class IssueActivity extends AppCompatActivity {
         mUpVotes.setText(String.valueOf(issue.UpVotes));
         mDownVotes.setText(String.valueOf(issue.DownVotes));
 
-        if(issue.Comments.size() == 0)
+        if(issue.Comments == null)
+        {
+            issue.Comments = new ArrayList<>();
+        }
+
+        if(issue.Images == null)
+        {
+            issue.Images = new ArrayList<>();
+        }
+
+        if( issue.Comments.size() == 0)
         {
             CommentGetModel comments = new CommentGetModel();
             comments.Creator = "No Comments";
@@ -92,6 +103,7 @@ public class IssueActivity extends AppCompatActivity {
         listview.setAdapter(adapter);
 
         //set listview height
+
         int grossElementHeight = 0;
         for (int i = 0; i < issue.Comments.size(); i++) {
             View childView = adapter.getView(i, null, listview);

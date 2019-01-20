@@ -146,14 +146,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= 4;
     }
 
     /**
      * Shows the progress UI and hides the login form.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private void showProgress(final boolean show) {
+    public void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
@@ -218,6 +218,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onErrorResponse(VolleyError error) {
             showProgress(false);
+            goToRegister();
         }
     }) {
         @Override
@@ -240,6 +241,12 @@ public class LoginActivity extends AppCompatActivity {
     public void goToIssuesScreen()
     {
         Intent intent = new Intent(this, IssuesActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToRegister()
+    {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
