@@ -8,6 +8,15 @@ public class CommentGetModel {
     @SerializedName("Id")
     private UUID id;
 
+    public CommentGetModel() {
+    }
+
+    public CommentGetModel(CommentModel tempComment) {
+        id = tempComment.Id;
+        Content = tempComment.Content;
+        Creator = tempComment.Creator;
+    }
+
     public UUID getId() {
         return id;
     }

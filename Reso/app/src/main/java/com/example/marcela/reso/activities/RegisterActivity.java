@@ -36,6 +36,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mEmailEditText;
     private EditText mPasswordEditText;
     private EditText mAgeEditText;
+    private EditText mLongitudeEditText;
+    private EditText mLatitudeEditText;
+    private EditText mRadiusEditText;
     private Button mRegisterButton;
 
     @Override
@@ -48,7 +51,9 @@ public class RegisterActivity extends AppCompatActivity {
         mPasswordEditText = (EditText) findViewById(R.id.et_activity_register_password);
         mRegisterButton = (Button) findViewById(R.id.b_activity_register_register);
         mAgeEditText = (EditText) findViewById(R.id.et_activity_register_age);
-
+        mLongitudeEditText = (EditText) findViewById(R.id.et_activity_register_longitude);
+        mLatitudeEditText = (EditText) findViewById(R.id.et_activity_register_latitude);
+        mRadiusEditText = (EditText) findViewById(R.id.et_activity_register_radius);
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,9 +71,9 @@ public class RegisterActivity extends AppCompatActivity {
         String name = mNameEditText.getText().toString();
         String email = mEmailEditText.getText().toString();
         String password = mPasswordEditText.getText().toString();
-        double latitude = 45.27;
-        double longitude = 21.28;
-        int radius = 100;
+        double latitude = Double.parseDouble(mLatitudeEditText.getText().toString());
+        double longitude =  Double.parseDouble(mLongitudeEditText.getText().toString());
+        int radius =  Integer.parseInt(mRadiusEditText.getText().toString());;
         int age = Integer.parseInt(mAgeEditText.getText().toString());
         int gender = 1;
         UUID id = UUID.randomUUID();

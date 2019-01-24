@@ -40,7 +40,18 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:hint="Description" />
-
+        <EditText
+            android:id="@+id/et_activity_add_issue_longitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Longitude" />
+        <EditText
+            android:id="@+id/et_activity_add_issue_latitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Latitude" />
     <Button
         android:id="@+id/btn_activity_add_issue_add"
         android:layout_width="match_parent"

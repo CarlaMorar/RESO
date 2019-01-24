@@ -37,6 +37,8 @@ public class AddIssueActivity extends AppCompatActivity {
 
     private EditText mNameEditText;
     private EditText mDetailsEditText;
+    private EditText mLongitude;
+    private EditText mLatitude;
     private Button mAddIssueButton;
 
     @Override
@@ -74,21 +76,23 @@ public class AddIssueActivity extends AppCompatActivity {
         mNameEditText = findViewById(R.id.et_activity_add_issue_name);
         mDetailsEditText = findViewById(R.id.et_activity_add_issue_description);
         mAddIssueButton = findViewById(R.id.btn_activity_add_issue_add);
+        mLatitude=findViewById(R.id.et_activity_add_issue_latitude);
+        mLongitude=findViewById(R.id.et_activity_add_issue_longitude);
     }
 
     private void addIssue() throws JSONException {
         final UserHandler userHandler = new UserHandler(this);
-        UserData userData = userHandler.getUserData();
+        final UserData userData = userHandler.getUserData();
 
         final AddIssueModel mIssueAddModel = new AddIssueModel();
         mIssueAddModel.Id = UUID.randomUUID();
         mIssueAddModel.Title = mNameEditText.getText().toString();
         mIssueAddModel.Description = mDetailsEditText.getText().toString();
-        mIssueAddModel.Latitude = 45.7469683;
-        mIssueAddModel.Longitude = 21.2440447;
+        mIssueAddModel.Latitude =  Double.parseDouble(mLatitude.getText().toString());
+        mIssueAddModel.Longitude = Double.parseDouble(mLongitude.getText().toString());
         mIssueAddModel.CreatedBy = userData.getId();
         List<String> images = new ArrayList<>();
-        images.add("http://google.ro");
+        //images.add("http://google.ro");
 
         mIssueAddModel.Images = images;
 
@@ -103,6 +107,7 @@ public class AddIssueActivity extends AppCompatActivity {
                 //TODO: handle success
                 Toast.makeText(AddIssueActivity.this,"Succes!", Toast.LENGTH_SHORT).show();
                 IssueHelper.tempIssue = mIssueAddModel;
+                IssueHelper.CreatedBy =userData.FullName;
                 AddIssueActivity.this.finish();
             }
         }, new Response.ErrorListener() {

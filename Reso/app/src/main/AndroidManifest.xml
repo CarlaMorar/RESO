@@ -51,7 +51,8 @@
         <activity
             android:name=".activities.AddIssueActivity"
             android:label="@string/title_activity_add_issue_activitz"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.AddCommentActivity"></activity>
     </application>
 
 </manifest>

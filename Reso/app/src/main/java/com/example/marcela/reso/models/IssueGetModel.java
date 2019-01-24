@@ -9,8 +9,7 @@ public class IssueGetModel {
     public IssueGetModel() {
     }
 
-    public IssueGetModel(AddIssueModel issue )
-    {
+    public IssueGetModel(AddIssueModel issue, String creator) {
         Id = issue.Id;
         Description = issue.Description;
         Title = issue.Title;
@@ -20,6 +19,8 @@ public class IssueGetModel {
         DownVotes = 0;
         CreatedBy = issue.CreatedBy;
         Images = issue.Images;
+        Creator = creator;
+
     }
 
     public UUID Id;
@@ -42,12 +43,12 @@ public class IssueGetModel {
 
     public String Creator;
 
-//    public virtual ICollection<CommentGetModel> Comments;
+    //    public virtual ICollection<CommentGetModel> Comments;
 //
 //    public  List <String> Images;
     public List<String> Images;
 
-    public  List<CommentGetModel> Comments;
+    public List<CommentGetModel> Comments;
 
 }
 

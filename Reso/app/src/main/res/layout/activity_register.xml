@@ -65,16 +65,37 @@
                     android:id="@+id/et_activity_register_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="200dp"
+                    android:layout_marginTop="150dp"
                     android:inputType="textPassword"
                     android:hint="Password"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/et_activity_register_longitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="200dp"
+                    android:hint="Longitude"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/et_activity_register_latitude"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="250dp"
+                    android:hint="Latitude"
+                    android:textStyle="bold" />
+                <EditText
+                    android:id="@+id/et_activity_register_radius"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="300dp"
+                    android:hint="Radius"
                     android:textStyle="bold" />
                 <Button
                     android:id="@+id/b_activity_register_register"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="300dp"
+                    android:layout_marginTop="350dp"
                     android:text="Register"
                     android:textStyle="bold" />
             </RelativeLayout>

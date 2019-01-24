@@ -67,10 +67,10 @@ public class IssuesActivity extends FragmentActivity implements OnMapReadyCallba
         markersDictionary = new HashMap<>();
         for (IssueGetModel issue : issues)
         {
-            Random rand = new Random();
-            int nr = rand.nextInt(20500) + 1000 ;
+            //Random rand = new Random();
+            //int nr = rand.nextInt(20500) + 1000 ;
 
-            LatLng location = new LatLng(issue.Latitude - nr, issue.Longitude + nr);
+            LatLng location = new LatLng(issue.Latitude , issue.Longitude );
             MarkerOptions marker = new MarkerOptions().position(location).title(issue.Title);
 
             Marker amarker = mMap.addMarker(marker);
@@ -101,10 +101,10 @@ public class IssuesActivity extends FragmentActivity implements OnMapReadyCallba
 
         AddIssueModel issue = IssueHelper.tempIssue;
 
-        Random rand = new Random();
-        int nr = rand.nextInt(20500) + 1000 ;
+        //Random rand = new Random();
+        //int nr = rand.nextInt(20500) + 1000 ;
 
-        LatLng location = new LatLng(issue.Latitude - nr, issue.Longitude + nr);
+        LatLng location = new LatLng(issue.Latitude , issue.Longitude );
         MarkerOptions marker = new MarkerOptions().position(location).title(issue.Title);
 
         Marker amarker = mMap.addMarker(marker);
@@ -113,10 +113,11 @@ public class IssuesActivity extends FragmentActivity implements OnMapReadyCallba
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.latitude, location.longitude),13f));
         mMap.addMarker(marker);
 
-        IssueGetModel newIssue = new IssueGetModel(issue);
+        IssueGetModel newIssue = new IssueGetModel(issue,IssueHelper.CreatedBy);
 
         userData.Issues.add(newIssue);
         IssueHelper.tempIssue = null;
+        IssueHelper.CreatedBy="";
     }
 
     private void showIssueScreen(UUID issueId) {
